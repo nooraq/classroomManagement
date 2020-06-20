@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Menu, Icon, message } from 'antd';
+
 import { observer, inject } from 'mobx-react';
 import { history, PATHS } from 'src/router';
 import styles from './BasicLayout.less';
 
 const { SubMenu, Item: MenuItem } = Menu;
 
-@inject('layout', 'user')
+@inject('user')
 @observer
 class Header extends Component {
   toggleSider = () => {
@@ -35,14 +36,13 @@ class Header extends Component {
 
   render() {
     const {
-      layout: { foldSidebar },
       user: { user }
     } = this.props;
     return (
       <div className={styles['layout-hd']}>
         <div className={styles['toggle-sider-btn']} onClick={this.toggleSider}>
-          <Icon type={foldSidebar ? 'menu-unfold' : 'menu-fold'} />
         </div>
+        <
         <Menu
           mode="horizontal"
           className={styles['layout-logout']}
@@ -55,7 +55,7 @@ class Header extends Component {
                 <Icon
                   type="user"
                 />
-                {user}
+                {user.name}
               </span>
           )}
           >

@@ -5,7 +5,7 @@ export default {
   exact: true,
   routes: [
     {
-      path: '/test/page',
+      path: '/usermanage',
       name: '测试子页面',
       component: () => import('src/views/TestPage')
     },

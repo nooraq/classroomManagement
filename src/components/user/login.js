@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import {
-  Button, Row, Form, Input, Col, message
+  Button, Row, Input, Col, message
 } from 'antd';
+import { Form } from '@ant-design/compatible';
+import '@ant-design/compatible/assets/index.css';
 import { observer, inject } from 'mobx-react';
 import { withRouter } from 'react-router-dom';
 import { history, PATHS } from 'src/router';
@@ -48,11 +50,11 @@ class Login extends Component {
     return (
       <div className={styles.login}>
         <div className={styles['login-title']}>
-            登录
+          登录
         </div>
         <form className={styles.form}>
           <FormItem {...formItemLayout} label="账号">
-            {getFieldDecorator('username', {
+            {getFieldDecorator('name', {
               rules: [
                 {
                   required: true,
