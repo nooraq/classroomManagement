@@ -1,7 +1,7 @@
-import layout from './layout';
 import user from './user';
+import manage from './manage';
 
 export default {
-  layout,
-  user
+  user,
+  manage
 };

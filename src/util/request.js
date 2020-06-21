@@ -12,9 +12,9 @@ function request(url, options) {
     baseURL: options.baseURL || BASE_API_PREFIX,
     headers: options.headers || {}
   };
-  const optionData = options.data || {};
-  if (method === 'get') opts.params = optionData;
-  else opts.data = optionData;
+  if (options.params) opts.params = options.params;
+  else opts.data = options.data;
+
   return axios(opts)
     .then((res) => {
       const response = res || {};

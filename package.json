@@ -17,9 +17,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@ant-design/compatible": "^1.0.2",
+    "@ant-design/icons": "^4.2.1",
     "@babel/polyfill": "^7.0.0",
     "@loadable/component": "^5.7.0",
-    "antd": "^3.26.18",
+    "antd": "^4.3.4",
     "axios": "^0.18.0",
     "core-js": "^3.0.0",
     "history": "^4.7.2",

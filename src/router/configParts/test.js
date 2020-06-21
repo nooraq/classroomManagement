@@ -1,18 +1,22 @@
 export default {
-  path: '/test',
-  icon: 'icon-shujujicheng',
-  name: '测试栏目',
   exact: true,
   routes: [
     {
-      path: '/usermanage',
-      name: '测试子页面',
-      component: () => import('src/views/TestPage')
-    },
-    {
-      path: '/test/mock',
-      name: 'mock demo',
-      component: () => import('src/views/Mock')
+      path: '/bulletin',
+      name: '公告',
+      component: () => import('src/views/Bulletin')
+    }, {
+      path: '/comment',
+      name: '评论',
+      component: () => import('src/views/Comment')
+    }, {
+      path: '/data',
+      name: '公告',
+      component: () => import('src/views/Data')
+    }, {
+      path: '/course',
+      name: '公告',
+      component: () => import('src/views/Course')
     }
   ]
 };
