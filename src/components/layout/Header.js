@@ -35,22 +35,24 @@ class Header extends Component {
   }
 
   changeModule = (e) => {
-    const {
-      user: { update }
-    } = this.props;
-    update({ selectModule: e.key });
     history.push(`/${e.key}`);
   }
 
   render() {
     const {
-      user: { user, selectModule }
+      user: { user },
+      location: { pathname }
     } = this.props;
     return (
       <div className={styles['layout-hd']}>
         <div className={styles['toggle-sider-btn']} onClick={this.toggleSider}>
         </div>
-        <Menu mode="horizontal" onClick={this.changeModule} selectedKeys={[selectModule]}>
+        <Menu
+          mode="horizontal"
+          onClick={this.changeModule}
+          selectedKeys={pathname.split('/')}
+          style={{ display: 'inline-block' }}
+        >
           <Menu.Item key="bulletin">公告栏</Menu.Item>
           <Menu.Item key="course">课程</Menu.Item>
           <Menu.Item key="comment">留言</Menu.Item>

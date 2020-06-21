@@ -88,7 +88,7 @@ class Bulletin extends Component {
             <List.Item>
               <Card className={styles.listitem} title={item.title} extra={<Button type="link" onClick={() => this.onDelete(item.id)}>删除</Button>}>
                 <div>{item.introduce}</div>
-                <img className={styles.img} alt="暂无图片" src={`http:${BASE_URL}${item.imgUrl}`} />
+                <img className={styles.img} alt="暂无图片" src={`http:${BASE_URL}/${item.imgurl}`} />
               </Card>
             </List.Item>
           )}

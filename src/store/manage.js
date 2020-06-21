@@ -4,10 +4,16 @@ import { action, extendObservable } from 'mobx';
 const OBSERVABLE = {
   bulletinData: [],
   bulletinVisiable: false,
-  fileList: []
+  fileList: [],
+  commentData: [],
+  commentVisiable: false,
+  coursesData: [],
+  courseVisiable: false,
+  dataData: [],
+  dataVisiable: false
 };
 
-class User {
+class Manage {
   constructor() {
     extendObservable(this, {
       ...OBSERVABLE
@@ -37,6 +43,47 @@ class User {
     await api.deleteBulletin(params);
     this.getBulletins();
   }
+
+  @action.bound async getComments() {
+    const res = await api.getComments();
+    this.commentData = res;
+  }
+
+  @action.bound async postComment(params) {
+    await api.postComment(params);
+    this.commentVisiable = false;
+    this.fileList = [];
+  }
+
+  @action.bound async deleteComment(params) {
+    await api.deleteComment(params);
+    this.getComments();
+  }
+
+  @action.bound async getCourses(params) {
+    this.coursesData = await api.getCourses(params);
+  }
+
+  @action.bound async postCourse(params) {
+    await api.postCourse(params);
+    this.courseVisiable = false;
+    this.getCourses();
+  }
+
+  @action.bound async deleteCourse(params) {
+    await api.deleteCourse(params);
+    this.getCourses();
+  }
+
+  @action.bound async getData(params) {
+    this.dataData = await api.getData(params);
+  }
+
+  @action.bound async postData(params) {
+    await api.postData(params);
+    this.dataVisiable = false;
+    this.getData();
+  }
 }
 
-export default new User();
+export default new Manage();
