@@ -109,16 +109,16 @@ class Bulletin extends Component {
           onOk={this.submitNewBulletin}
         >
           <Form ref={this.formRef}>
-            <Form.Item name="title" label="标题" required>
+            <Form.Item name="title" label="标题" rules={[{ required: true }]}>
               <Input />
             </Form.Item>
-            <Form.Item name="introduce" label="介绍" required>
+            <Form.Item name="introduce" label="介绍" rules={[{ required: true }]}>
               <Input />
             </Form.Item>
             <Form.Item
               name="imgurl"
               label="图片"
-              required
+              rules={[{ required: true }]}
               getValueFromEvent={this.disposeUpload}
             >
               <Upload

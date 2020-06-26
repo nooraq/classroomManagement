@@ -106,14 +106,14 @@ class Data extends Component {
             <Form.Item
               label="资料名"
               name="name"
-              required
+              rules={[{ required: true }]}
             >
               <Input />
             </Form.Item>
             <Form.Item
               label="资料简介"
               name="introduce"
-              required
+              rules={[{ required: true }]}
             >
               <Input />
             </Form.Item>
@@ -121,7 +121,7 @@ class Data extends Component {
               getValueFromEvent={this.disposeUpload}
               name="fileurl"
               label="资料上传"
-              required
+              rules={[{ required: true }]}
             >
               <Upload
                 action={`${BASE_URL}/file`}

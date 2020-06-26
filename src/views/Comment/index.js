@@ -91,12 +91,12 @@ class Comment extends Component {
             <Form.Item
               label="用户ID"
               name="personid"
-              required
+              rules={[{ required: true }]}
               initialValue={user.id}
             >
               {user.name}
             </Form.Item>
-            <Form.Item name="introduce" label="留言内容" required>
+            <Form.Item name="introduce" label="留言内容" rules={[{ required: true }]}>
               <Input />
             </Form.Item>
           </Form>

@@ -61,6 +61,23 @@ export function deleteCourse(params) {
     baseURL: BASE_URL
   });
 }
+
+export function getCourseComments(params) {
+  return request('/coursenotes', {
+    method: 'get',
+    params,
+    baseURL: BASE_URL
+  });
+}
+
+export function postCourseComment(params) {
+  return request('/coursenotes', {
+    method: 'post',
+    data: params,
+    baseURL: BASE_URL
+  });
+}
+
 export function getData(params) {
   return request('/materials', {
     method: 'get',

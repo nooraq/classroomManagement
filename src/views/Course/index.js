@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import {
-  List, Card, Button, Modal, Form, Input, Upload, InputNumber
+  List, Card, Button, Modal, Form, Input, Upload, InputNumber, Table
 } from 'antd';
 import { UploadOutlined, PlusOutlined } from '@ant-design/icons';
 
@@ -10,10 +10,12 @@ import styles from './index.less';
 
 const { TextArea } = Input;
 
-@inject('manage')
+@inject('manage', 'user')
 @observer
 class Bulletin extends Component {
   formRef = React.createRef();
+
+  form1Ref = React.createRef();
 
   state = {
     fileList: [],
@@ -65,9 +67,37 @@ class Bulletin extends Component {
     deleteCourse({ id });
   };
 
+  onComment = (id) => {
+    const { manage: { update, getCourseComments } } = this.props;
+    update({
+      courseId: id,
+      courseCommentsVisiable: true
+    });
+    getCourseComments();
+  }
+
+  postComment = () => {
+    const { validateFields } = this.form1Ref.current;
+    validateFields().then((data) => {
+      const { manage: { postCourseComment }, user: { user: { id: personid } } } = this.props;
+      postCourseComment({ personid, ...data });
+    }).catch(() => {});
+  }
+
+  onCommentsCancel = () => {
+    const { manage: { update } } = this.props;
+    update({
+      courseCommentsVisiable: false
+    });
+  }
+
 
   render() {
-    const { manage: { courseVisiable, coursesData } } = this.props;
+    const {
+      manage: {
+        courseVisiable, coursesData, courseCommentsVisiable, courseComments
+      }
+    } = this.props;
     const { fileList, fileVideoList } = this.state;
     const uploadButton = (
       <div>
@@ -114,12 +144,22 @@ class Bulletin extends Component {
                     {item.price}
                   </span>}
                 </div>}
-                extra={<Button
-                  type="link"
-                  onClick={() => this.onDelete(item.id)}
-                >
-                  删除
-                </Button>}
+                extra={
+                  <>
+                    <Button
+                      type="link"
+                      onClick={() => this.onComment(item.id)}
+                    >
+                      评论
+                    </Button>
+                    <Button
+                      type="link"
+                      onClick={() => this.onDelete(item.id)}
+                    >
+                      删除
+                    </Button>
+                  </>
+                }
               >
                 <div>{item.introduce}</div>
                 {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
@@ -150,19 +190,19 @@ class Bulletin extends Component {
               sm: { span: 5 },
             }}
           >
-            <Form.Item name="name" label="课程名" required>
+            <Form.Item name="name" label="课程名" rules={[{ required: true }]}>
               <Input />
             </Form.Item>
-            <Form.Item name="price" label="课程价格" required>
-              <InputNumber />
+            <Form.Item name="price" label="课程价格" rules={[{ required: true }]}>
+              <InputNumber min={0} />
             </Form.Item>
-            <Form.Item name="introduce" label="课程介绍" required>
+            <Form.Item name="introduce" label="课程介绍" rules={[{ required: true }]}>
               <TextArea />
             </Form.Item>
             <Form.Item
               name="coverimg"
               label="封面图"
-              required
+              rules={[{ required: true }]}
               getValueFromEvent={this.disposeUpload}
             >
               <Upload
@@ -177,7 +217,7 @@ class Bulletin extends Component {
             <Form.Item
               name="videourl"
               label="课程视频"
-              required
+              rules={[{ required: true }]}
               getValueFromEvent={this.disposeUpload}
             >
               <Upload
@@ -193,6 +233,38 @@ class Bulletin extends Component {
               </Upload>
             </Form.Item>
           </Form>
+        </Modal>
+        <Modal
+          onCancel={this.onCommentsCancel}
+          visible={courseCommentsVisiable}
+          footer={null}
+          title="评论"
+        >
+          <Form
+            style={{ marginBottom: 24 }}
+            ref={this.form1Ref}
+            onFinish={this.postComment}
+            layout="inline"
+          >
+            <Form.Item name="content" rules={[{ required: true }]} style={{ width: '72%' }}>
+              <Input />
+            </Form.Item>
+            <Form.Item>
+              <Button type="primary" htmlType="submit">提交评论</Button>
+            </Form.Item>
+          </Form>
+          <Table
+            columns={[{
+              dataIndex: 'personid',
+              title: '用户'
+            }, {
+              dataIndex: 'content',
+              title: '留言'
+            }
+            ]}
+            dataSource={courseComments}
+            scroll={{ y: 240 }}
+          />
         </Modal>
       </div>
     );

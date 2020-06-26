@@ -10,7 +10,10 @@ const OBSERVABLE = {
   coursesData: [],
   courseVisiable: false,
   dataData: [],
-  dataVisiable: false
+  dataVisiable: false,
+  courseComments: [],
+  courseCommentsVisiable: false,
+  courseId: undefined
 };
 
 class Manage {
@@ -62,11 +65,6 @@ class Manage {
     this.getComments();
   }
 
-  @action.bound async deleteMaterials(params) {
-    await api.deleteMaterials(params);
-    this.getData();
-  }
-
   @action.bound async getCourses(params) {
     this.coursesData = await api.getCourses(params);
   }
@@ -82,6 +80,16 @@ class Manage {
     this.getCourses();
   }
 
+  @action.bound async getCourseComments(params) {
+    this.courseComments = await api.getCourseComments({ courseid: this.courseId, ...params });
+  }
+
+  @action.bound async postCourseComment(params) {
+    await api.postCourseComment({ courseid: this.courseId, ...params });
+    this.getCourseComments();
+  }
+
+
   @action.bound async getData(params) {
     this.dataData = await api.getData(params);
   }
@@ -89,6 +97,11 @@ class Manage {
   @action.bound async postData(params) {
     await api.postData(params);
     this.dataVisiable = false;
+    this.getData();
+  }
+
+  @action.bound async deleteMaterials(params) {
+    await api.deleteMaterials(params);
     this.getData();
   }
 }
