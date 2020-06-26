@@ -3,9 +3,8 @@ import { action, extendObservable } from 'mobx';
 // 可观察属性
 const OBSERVABLE = {
   isLogin: false,
-  user: {
-
-  }
+  user: {},
+  users: []
 };
 
 
@@ -34,6 +33,10 @@ class User {
     } catch (err) {
       throw new Error(err);
     }
+  }
+
+  @action.bound async getUsers(params) {
+    this.users = await api.getUsers(params);
   }
 
   @action.bound reset() {

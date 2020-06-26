@@ -255,7 +255,7 @@ class Bulletin extends Component {
           </Form>
           <Table
             columns={[{
-              dataIndex: 'personid',
+              dataIndex: 'name',
               title: '用户'
             }, {
               dataIndex: 'content',

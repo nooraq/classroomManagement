@@ -3,6 +3,7 @@ import { observer, inject } from 'mobx-react';
 import {
   Table, Button, Modal, Form, Input
 } from 'antd';
+import { toJS } from 'mobx';
 import styles from './index.less';
 
 @inject('manage', 'user')
@@ -11,14 +12,16 @@ class Comment extends Component {
   formRef = React.createRef();
 
   componentDidMount() {
-    const { manage: { getComments } } = this.props;
-    getComments();
+    const { user: { getUsers } } = this.props;
+    getUsers();
   }
 
-  onVisiable = () => {
-    const { manage: { update } } = this.props;
+  onVisiable = (id) => () => {
+    const { manage: { update, getComments } } = this.props;
+    getComments({ personid: id });
     update({
-      commentVisiable: true
+      commentVisiable: true,
+      replayId: id
     });
   }
 
@@ -31,9 +34,9 @@ class Comment extends Component {
 
   submitNewComment = () => {
     const { validateFields } = this.formRef.current;
-    validateFields().then((params) => {
-      const { manage: { postComment } } = this.props;
-      postComment(params);
+    validateFields().then((data) => {
+      const { manage: { postComment }, user: { user } } = this.props;
+      postComment({ personid: user.id, ...data });
     });
   }
 
@@ -45,61 +48,77 @@ class Comment extends Component {
   render() {
     const {
       manage:
-      { commentData, commentVisiable }, user: { user }
+      { commentData, commentVisiable }, user: { user, users }
     } = this.props;
     return (
       <div>
-        <Button
-          type="primary"
-          className={styles.btn}
-          onClick={this.onVisiable}
-        >
-          新建留言
-        </Button>
         <Table
           className={styles.table}
           columns={[{
             dataIndex: 'name',
-            title: '用户ID',
+            title: '用户名',
             render: (name, record) => (user.id === record.personid
               ? <span style={{ fontSize: 18, fontWeight: 800 }}>{name}</span>
               : name)
-
-          }, {
-            dataIndex: 'introduce',
-            title: '留言'
           }, {
             dataIndex: 'id',
-            render: (id) => <Button
-              type="link"
-              onClick={() => this.onDelete(id)}
-            >
-              删除
-            </Button>
+            render: (id) => <>
+              <Button onClick={this.onVisiable(id)} type="link">
+                评论
+              </Button>
+            </>
           }]}
           rowKey="id"
-          dataSource={commentData}
+          dataSource={toJS(users)}
           pagination={null}
         />
         <Modal
           onCancel={this.onUnvisiable}
-          onOk={this.submitNewComment}
           visible={commentVisiable}
           title="新建留言"
         >
-          <Form ref={this.formRef}>
+          <Form
+            style={{ marginBottom: 24 }}
+            ref={this.formRef}
+            onFinish={this.submitNewComment}
+            layout="inline"
+          >
             <Form.Item
-              label="用户ID"
-              name="personid"
+              name="introduce"
               rules={[{ required: true }]}
-              initialValue={user.id}
+              style={{ width: '72%' }}
             >
-              {user.name}
-            </Form.Item>
-            <Form.Item name="introduce" label="留言内容" rules={[{ required: true }]}>
               <Input />
             </Form.Item>
+            <Form.Item>
+              <Button type="primary" htmlType="submit">提交评论</Button>
+            </Form.Item>
           </Form>
+          <Table
+            className={styles.table}
+            columns={[{
+              dataIndex: 'name',
+              title: '用户名',
+              render: (name, record) => (user.id === record.personid
+                ? <span style={{ fontSize: 18, fontWeight: 800 }}>{name}</span>
+                : name)
+
+            }, {
+              dataIndex: 'introduce',
+              title: '留言'
+            }, {
+              dataIndex: 'id',
+              render: (id) => <Button
+                type="link"
+                onClick={() => this.onDelete(id)}
+              >
+                删除
+              </Button>
+            }]}
+            rowKey="id"
+            dataSource={commentData}
+            pagination={null}
+          />
         </Modal>
       </div>
     );

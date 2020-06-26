@@ -13,7 +13,8 @@ const OBSERVABLE = {
   dataVisiable: false,
   courseComments: [],
   courseCommentsVisiable: false,
-  courseId: undefined
+  courseId: undefined,
+  replayId: undefined
 };
 
 class Manage {
@@ -48,14 +49,13 @@ class Manage {
     this.getBulletins();
   }
 
-  @action.bound async getComments() {
-    const res = await api.getComments();
+  @action.bound async getComments(params) {
+    const res = await api.getComments(params);
     this.commentData = res;
   }
 
   @action.bound async postComment(params) {
-    await api.postComment(params);
-    this.commentVisiable = false;
+    await api.postComment({ replayid: this.replayId, ...params });
     this.fileList = [];
     this.getComments();
   }

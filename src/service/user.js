@@ -8,6 +8,14 @@ export function login(params) {
   });
 }
 
+export function getUsers(params) {
+  return request('/users', {
+    method: 'get',
+    params,
+    baseURL: BASE_URL
+  });
+}
+
 export function logout() {
   return Promise.resolve();
 }
