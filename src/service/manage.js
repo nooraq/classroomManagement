@@ -75,3 +75,10 @@ export function postData(params) {
     baseURL: BASE_URL
   });
 }
+
+export function deleteMaterials(params) {
+  return request(`/materials/${params.id}`, {
+    method: 'delete',
+    baseURL: BASE_URL
+  });
+}

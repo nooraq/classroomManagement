@@ -60,7 +60,8 @@ class Login extends Component {
                   required: true,
                   message: '请填写用户名',
                 }
-              ]
+              ],
+              initialValue: 'admin'
             })(
               <Input
                 size="large"
@@ -75,8 +76,9 @@ class Login extends Component {
                 {
                   required: true,
                   message: '请输入密码',
-                }
-              ]
+                },
+              ],
+              initialValue: 'admin'
             })(<Input
               size="large"
               type="password"

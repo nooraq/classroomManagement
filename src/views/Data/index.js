@@ -42,9 +42,13 @@ class Data extends Component {
   }
 
   onDelete = (id) => {
-    const { manage: { deleteComment } } = this.props;
-    deleteComment({ id });
+    const { manage: { deleteMaterials } } = this.props;
+    deleteMaterials({ id });
   };
+
+  onRemove = () => {
+    this.setState({ fileList: [] });
+  }
 
   disposeUpload = ({ file }) => {
     if (!file.response) return '';
@@ -60,7 +64,13 @@ class Data extends Component {
     const { fileList } = this.state;
     return (
       <div>
-        <Button type="primary" className={styles.btn} onClick={this.onVisiable}>新增资料</Button>
+        <Button
+          type="primary"
+          className={styles.btn}
+          onClick={this.onVisiable}
+        >
+          新增资料
+        </Button>
         <Table
           className={styles.table}
           columns={[{
@@ -117,6 +127,7 @@ class Data extends Component {
                 action={`${BASE_URL}/file`}
                 onChange={this.upload}
                 fileList={fileList}
+                onRemove={this.onRemove}
               >
                 <Button disabled={fileList.length >= 1}>
                   <UploadOutlined />

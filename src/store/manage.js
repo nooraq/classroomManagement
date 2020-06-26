@@ -31,6 +31,7 @@ class Manage {
   @action.bound async postBulletin(params) {
     await api.postBulletin(params);
     this.bulletinVisiable = false;
+    this.getBulletins();
     this.fileList = [];
   }
 
@@ -53,11 +54,17 @@ class Manage {
     await api.postComment(params);
     this.commentVisiable = false;
     this.fileList = [];
+    this.getComments();
   }
 
   @action.bound async deleteComment(params) {
     await api.deleteComment(params);
     this.getComments();
+  }
+
+  @action.bound async deleteMaterials(params) {
+    await api.deleteMaterials(params);
+    this.getData();
   }
 
   @action.bound async getCourses(params) {

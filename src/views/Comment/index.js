@@ -43,10 +43,19 @@ class Comment extends Component {
   };
 
   render() {
-    const { manage: { commentData, commentVisiable }, user: { user } } = this.props;
+    const {
+      manage:
+      { commentData, commentVisiable }, user: { user }
+    } = this.props;
     return (
       <div>
-        <Button type="primary" className={styles.btn} onClick={this.onVisiable}>新建留言</Button>
+        <Button
+          type="primary"
+          className={styles.btn}
+          onClick={this.onVisiable}
+        >
+          新建留言
+        </Button>
         <Table
           className={styles.table}
           columns={[{
@@ -87,7 +96,7 @@ class Comment extends Component {
             >
               {user.name}
             </Form.Item>
-            <Form.Item name="introduce" label="介绍" required>
+            <Form.Item name="introduce" label="留言内容" required>
               <Input />
             </Form.Item>
           </Form>

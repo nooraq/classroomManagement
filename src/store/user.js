@@ -3,7 +3,9 @@ import { action, extendObservable } from 'mobx';
 // 可观察属性
 const OBSERVABLE = {
   isLogin: false,
-  user: {}
+  user: {
+
+  }
 };
 
 

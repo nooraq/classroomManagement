@@ -114,7 +114,12 @@ class Bulletin extends Component {
                     {item.price}
                   </span>}
                 </div>}
-                extra={<Button type="link" onClick={() => this.onDelete(item.id)}>删除</Button>}
+                extra={<Button
+                  type="link"
+                  onClick={() => this.onDelete(item.id)}
+                >
+                  删除
+                </Button>}
               >
                 <div>{item.introduce}</div>
                 {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
@@ -124,7 +129,6 @@ class Bulletin extends Component {
                   controls
                   style={{ width: '100%' }}
                 />
-                {/* <img className={styles.img} alt="暂无图片" src={`http:${BASE_URL}/${item.imgurl}`} /> */}
               </Card>
             </List.Item>
           )}
@@ -162,7 +166,6 @@ class Bulletin extends Component {
               getValueFromEvent={this.disposeUpload}
             >
               <Upload
-                accept=".img,.jpg,.jpeg"
                 action={`${BASE_URL}/file`}
                 listType="picture-card"
                 onChange={this.uploadImg}
@@ -173,7 +176,7 @@ class Bulletin extends Component {
             </Form.Item>
             <Form.Item
               name="videourl"
-              label="课程图片"
+              label="课程视频"
               required
               getValueFromEvent={this.disposeUpload}
             >
