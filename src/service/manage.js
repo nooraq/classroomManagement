@@ -99,3 +99,23 @@ export function deleteMaterials(params) {
     baseURL: BASE_URL
   });
 }
+export function postUser(params) {
+  return request(`/users/${params.id}`, {
+    method: 'post',
+    baseURL: BASE_URL,
+    data: params
+  });
+}
+export function getUsers(params) {
+  return request('/users', {
+    method: 'get',
+    baseURL: BASE_URL,
+    params
+  });
+}
+export function deleteUser(params) {
+  return request(`/users/${params.id}`, {
+    method: 'delete',
+    baseURL: BASE_URL
+  });
+}

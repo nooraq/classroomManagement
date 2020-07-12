@@ -143,6 +143,12 @@ class Bulletin extends Component {
                     ¥
                     {item.price}
                   </span>}
+                  <div style={{ fontSize: 10 }}>
+                    分享积分比例：
+                    {`${item.rate}     `}
+                    分享次数:
+                    {item.sharenum}
+                  </div>
                 </div>}
                 extra={
                   <>
@@ -195,6 +201,13 @@ class Bulletin extends Component {
             </Form.Item>
             <Form.Item name="price" label="课程价格" rules={[{ required: true }]}>
               <InputNumber min={0} />
+            </Form.Item>
+            <Form.Item
+              name="rate"
+              label="分享积分比例"
+              rules={[{ required: true }]}
+            >
+              <InputNumber />
             </Form.Item>
             <Form.Item name="introduce" label="课程介绍" rules={[{ required: true }]}>
               <TextArea />

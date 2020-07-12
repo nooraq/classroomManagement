@@ -57,6 +57,7 @@ class Header extends Component {
           <Menu.Item key="course">课程</Menu.Item>
           <Menu.Item key="comment">留言</Menu.Item>
           <Menu.Item key="data">资料</Menu.Item>
+          <Menu.Item key="userManage">用户管理</Menu.Item>
         </Menu>
         <Menu
           mode="horizontal"

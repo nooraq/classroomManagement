@@ -17,6 +17,10 @@ export default {
       path: '/course',
       name: '公告',
       component: () => import('src/views/Course')
+    }, {
+      path: '/userManage',
+      name: '用户',
+      component: () => import('src/views/Users')
     }
   ]
 };

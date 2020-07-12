@@ -14,7 +14,10 @@ const OBSERVABLE = {
   courseComments: [],
   courseCommentsVisiable: false,
   courseId: undefined,
-  replayId: undefined
+  replayId: undefined,
+  userVisible: false,
+  userList: undefined,
+  fixUser: undefined
 };
 
 class Manage {
@@ -103,6 +106,21 @@ class Manage {
   @action.bound async deleteMaterials(params) {
     await api.deleteMaterials(params);
     this.getData();
+  }
+
+  @action.bound async getUsers(params) {
+    const res = await api.getUsers(params);
+    this.userList = res;
+  }
+
+  @action.bound async postUser(params) {
+    await api.postUser(params);
+    this.getUsers();
+  }
+
+  @action.bound async deleteUser(params) {
+    await api.deleteUser(params);
+    this.getUsers();
   }
 }
 
