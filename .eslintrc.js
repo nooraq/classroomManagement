@@ -15,7 +15,7 @@ module.exports = {
     'no-console': 'warn',
     'no-debugger': 'off',
     "max-len": [1, {
-      code: 80,
+      code: 100,
       tabWidth: 2,
       ignoreComments: true,
       ignoreUrls: true,
@@ -23,9 +23,9 @@ module.exports = {
       ignoreRegExpLiterals: true
     }],
     "no-return-await": "off",
-    "no-plusplus":"off",
-    "no-unused-expressions":"off",
-    "jsx-a11y/no-static-element-interactions":"off",
+    "no-plusplus": "off",
+    "no-unused-expressions": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
     "comma-dangle": "off",
     "import/no-extraneous-dependencies": ["error", {
       "devDependencies": true,
@@ -35,9 +35,9 @@ module.exports = {
     "global-require": [0],
     "react/prop-types": [0],
     "func-names": [0],
-    "import/no-unresolved":[0],
-    "no-undef":[0],
-    "class-methods-use-this":[0],
+    "import/no-unresolved": [0],
+    "no-undef": [0],
+    "class-methods-use-this": [0],
     "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
     "react/prefer-stateless-function": 0,
     "react/self-closing-comp": 0,
@@ -51,8 +51,8 @@ module.exports = {
     'react/no-unused-state': [0],
     "arrow-parens": 0,
     "no-nested-ternary": 0,
-    "consistent-return":[0],
-    'react/jsx-closing-tag-location':[0],
-    'jsx-a11y/no-noninteractive-tabindex':[0]
+    "consistent-return": [0],
+    'react/jsx-closing-tag-location': [0],
+    'jsx-a11y/no-noninteractive-tabindex': [0]
   }
 }

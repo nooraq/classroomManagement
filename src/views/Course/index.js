@@ -81,7 +81,7 @@ class Bulletin extends Component {
     validateFields().then((data) => {
       const { manage: { postCourseComment }, user: { user: { id: personid } } } = this.props;
       postCourseComment({ personid, ...data });
-    }).catch(() => {});
+    }).catch(() => { });
   }
 
   onCommentsCancel = () => {

@@ -61,7 +61,7 @@ class Login extends Component {
                   message: '请填写用户名',
                 }
               ],
-              initialValue: 'admin'
+              initialValue: 'jiaonan'
             })(
               <Input
                 size="large"
@@ -78,7 +78,7 @@ class Login extends Component {
                   message: '请输入密码',
                 },
               ],
-              initialValue: 'admin'
+              initialValue: 'jiaonan'
             })(<Input
               size="large"
               type="password"

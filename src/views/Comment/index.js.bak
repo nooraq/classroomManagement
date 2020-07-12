@@ -75,7 +75,6 @@ class Comment extends Component {
         <Modal
           onCancel={this.onUnvisiable}
           visible={commentVisiable}
-          footer={null}
           title="回复留言"
         >
           <Form
@@ -92,7 +91,7 @@ class Comment extends Component {
               <Input />
             </Form.Item>
             <Form.Item>
-              <Button type="primary" htmlType="submit">提交回复</Button>
+              <Button type="primary" htmlType="submit">提交评论</Button>
             </Form.Item>
           </Form>
           <Table
